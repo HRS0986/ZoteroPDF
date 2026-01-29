@@ -4,21 +4,21 @@
   "version": "3.1.0",
   "description": "Zotero Plugin Template",
   "config": {
-    "addonName": "Zotero Plugin Template",
-    "addonID": "addontemplate@euclpts.com",
-    "addonRef": "addontemplate",
-    "addonInstance": "AddonTemplate",
-    "prefsPrefix": "extensions.zotero.addontemplate"
+    "addonName": "Zotero PDF",
+    "addonID": "zoteropdf@euclpts.com",
+    "addonRef": "zoteropdf",
+    "addonInstance": "ZoteroPDF",
+    "prefsPrefix": "extensions.zotero.zoteropdf"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/windingwind/zotero-plugin-template.git"
+    "url": "git+https://github.com/HRS0986/ZoteroPDF.git"
   },
-  "author": "windingwind",
+  "author": "HRS0986",
   "bugs": {
-    "url": "https://github.com/windingwind/zotero-plugin-template/issues"
+    "url": "https://github.com/HRS0986/ZoteroPDF/issues"
   },
-  "homepage": "https://github.com/windingwind/zotero-plugin-template#readme",
+  "homepage": "https://github.com/HRS0986/ZoteroPDF#readme",
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "start": "zotero-plugin serve",
