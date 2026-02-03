@@ -144,7 +144,7 @@ export class UIExampleFactory {
       tag: "menuitem",
       id: "zotero-itemmenu-addontemplate-test",
       label: getString("menuitem-label"),
-      commandListener: (ev) => addon.hooks.onClickExportPDF(ev),
+      commandListener: (_) => addon.hooks.onClickExportPDFs(),
       icon: menuIcon,
     });
   }
