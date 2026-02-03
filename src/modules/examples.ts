@@ -144,43 +144,8 @@ export class UIExampleFactory {
       tag: "menuitem",
       id: "zotero-itemmenu-addontemplate-test",
       label: getString("menuitem-label"),
-      commandListener: (ev) => addon.hooks.onDialogEvents("dialogExample"),
+      commandListener: (ev) => addon.hooks.onClickExportPDF(ev),
       icon: menuIcon,
-    });
-  }
-
-  @example
-  static registerRightClickMenuPopup(win: Window) {
-    ztoolkit.Menu.register(
-      "item",
-      {
-        tag: "menu",
-        label: getString("menupopup-label"),
-        children: [
-          {
-            tag: "menuitem",
-            label: getString("menuitem-submenulabel"),
-            oncommand: "alert('Hello World! Sub Menuitem.')",
-          },
-        ],
-      },
-      "before",
-      win.document?.querySelector(
-        "#zotero-itemmenu-addontemplate-test",
-      ) as XUL.MenuItem,
-    );
-  }
-
-  @example
-  static registerWindowMenuWithSeparator() {
-    ztoolkit.Menu.register("menuFile", {
-      tag: "menuseparator",
-    });
-    // menu->File menuitem
-    ztoolkit.Menu.register("menuFile", {
-      tag: "menuitem",
-      label: getString("menuitem-filemenulabel"),
-      oncommand: "alert('Hello World! File Menuitem.')",
     });
   }
 

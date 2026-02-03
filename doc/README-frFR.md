@@ -90,7 +90,6 @@ Recherchez `@example` dans `src/examples.ts`. Les exemples sont appelés dans `s
 
 - registerStyleSheet (utilisé par l'extension officielle make-it-red qui sert d'exemple)
 - registerRightClickMenuItem
-- registerRightClickMenuPopup
 - registerWindowMenuWithSeprator
 - registerExtraColumn
 - registerExtraColumnWithCustomCell

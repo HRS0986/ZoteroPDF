@@ -87,7 +87,6 @@
 
 - registerStyleSheet(the official make-it-red example)
 - registerRightClickMenuItem
-- registerRightClickMenuPopup
 - registerWindowMenuWithSeprator
 - registerExtraColumn
 - registerExtraColumnWithCustomCell

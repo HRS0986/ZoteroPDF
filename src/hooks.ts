@@ -72,10 +72,6 @@ async function onMainWindowLoad(win: _ZoteroTypes.MainWindow): Promise<void> {
 
   UIExampleFactory.registerRightClickMenuItem();
 
-  UIExampleFactory.registerRightClickMenuPopup(win);
-
-  UIExampleFactory.registerWindowMenuWithSeparator();
-
   PromptExampleFactory.registerNormalCommandExample();
 
   PromptExampleFactory.registerAnonymousCommandExample(win);
@@ -89,8 +85,6 @@ async function onMainWindowLoad(win: _ZoteroTypes.MainWindow): Promise<void> {
     text: `[100%] ${getString("startup-finish")}`,
   });
   popupWin.startCloseTimer(5000);
-
-  addon.hooks.onDialogEvents("dialogExample");
 }
 
 async function onMainWindowUnload(win: Window): Promise<void> {
@@ -159,6 +153,23 @@ function onShortcuts(type: string) {
   }
 }
 
+function onClickExportPDF(e: Event) {
+  const item = Zotero.Items.get((e.target as any));
+  ztoolkit.log(e);
+  // copy e to clipboard
+  new ztoolkit.Clipboard().addText(JSON.stringify(e), "text/unicode").copy();
+  // get the item file path
+  const filePath = item.getFilePath();
+
+  // check if the file path exists and is a pdf
+  if (filePath && filePath.endsWith(".pdf")) {
+    ztoolkit.log("PDF File Found. Starting Export Process");
+    return;
+  }
+
+  // export the pdf
+}
+
 function onDialogEvents(type: string) {
   switch (type) {
     case "dialogExample":
@@ -194,4 +205,5 @@ export default {
   onPrefsEvent,
   onShortcuts,
   onDialogEvents,
+  onClickExportPDF,
 };

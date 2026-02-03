@@ -90,7 +90,6 @@ Search `@example` in `src/examples.ts`. The examples are called in `src/hooks.ts
 
 - registerStyleSheet(the official make-it-red example)
 - registerRightClickMenuItem
-- registerRightClickMenuPopup
 - registerWindowMenuWithSeprator
 - registerExtraColumn
 - registerExtraColumnWithCustomCell
