@@ -72,6 +72,8 @@ async function onMainWindowLoad(win: _ZoteroTypes.MainWindow): Promise<void> {
 
   UIExampleFactory.registerRightClickMenuItem();
 
+  UIExampleFactory.registerRightClickCollectionMenuItem();
+
   PromptExampleFactory.registerNormalCommandExample();
 
   PromptExampleFactory.registerAnonymousCommandExample(win);
