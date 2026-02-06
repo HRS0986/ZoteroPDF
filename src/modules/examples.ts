@@ -182,8 +182,8 @@ export class UIExampleFactory {
     ztoolkit.Menu.register("collection", {
       tag: "menuitem",
       id: "zotero-collectionmenu-addontemplate-test",
-      label: getString("menuitem-label"),
-      commandListener: (_) => addon.hooks.onClickExportPDFs(),
+      label: getString("menuitem-label-collection"),
+      commandListener: (_) => addon.hooks.onClickCollectionExportPDFs(),
       icon: menuIcon,
       getVisibility: () => {
         // Get the selected collection

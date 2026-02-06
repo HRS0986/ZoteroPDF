@@ -155,6 +155,126 @@ function onShortcuts(type: string) {
   }
 }
 
+async function onClickCollectionExportPDFs() {
+  // Get the selected collection from ZoteroPane
+  const ZoteroPane = ztoolkit.getGlobal("ZoteroPane");
+  const selectedCollection = ZoteroPane.getSelectedCollection();
+
+  if (!selectedCollection) {
+    ztoolkit.log("No collection selected");
+    return;
+  }
+
+  // Get all items in the collection
+  const collectionItems = selectedCollection.getChildItems();
+
+  if (!collectionItems || collectionItems.length === 0) {
+    ztoolkit.log("No items in the selected collection");
+    return;
+  }
+
+  // Get all pdf files from the collection items
+  const pdfFiles: Zotero.Item[] = [];
+
+  for (const item of collectionItems) {
+    if (item.isAttachment() && item.attachmentContentType === "application/pdf") {
+      const filePath = item.getFilePath();
+      if (filePath) {
+        pdfFiles.push(item);
+      }
+    } else if (item.isRegularItem()) {
+      // If it's a regular item, find all PDF attachments
+      const attachments = item.getAttachments();
+      for (const attachmentID of attachments) {
+        const attachment = Zotero.Items.get(attachmentID);
+        if (attachment.attachmentContentType === "application/pdf") {
+          const filePath = attachment.getFilePath();
+          if (filePath) {
+            pdfFiles.push(attachment);
+          }
+        }
+      }
+    }
+  }
+
+  ztoolkit.log("PDF Files:", pdfFiles);
+
+  if (pdfFiles.length === 0) {
+    ztoolkit.log("No PDF files found in the collection");
+    return;
+  } else {
+    // Show progress window
+    const progressWindow = new ztoolkit.ProgressWindow(addon.data.config.addonName, {
+      closeOnClick: true,
+      closeTime: -1,
+    });
+
+    // Open file picker dialog to ask where to save the PDFs
+    const savePath = await new ztoolkit.FilePicker(
+      "Export PDF Files from Collection",
+      "folder",
+      [
+        ["PDF File (*.pdf)", "*.pdf"],
+        ["All Files", "*.*"],
+      ]
+    ).open();
+
+    ztoolkit.log("Save Path:", savePath);
+
+    if (!savePath) {
+      ztoolkit.log("User cancelled file save");
+      return;
+    }
+
+    progressWindow.createLine({
+      text: "Exporting PDFs from collection...",
+      type: "default",
+      progress: 0,
+      icon: "loading"
+    }).show();
+
+    try {
+      let i = 1;
+      // Copy all pdf files to the selected location
+      for (const file of pdfFiles) {
+        const filePath = file.getFilePath();
+        if (!filePath) {
+          ztoolkit.log("PDF file not found");
+          continue;
+        }
+        const finalSavePath = `${savePath}\\${file.attachmentFilename}`;
+        await IOUtils.copy(filePath, finalSavePath);
+        progressWindow.changeLine({
+          text: `Exporting PDF ${i}/${pdfFiles.length}`,
+          type: "default",
+          progress: (i) / pdfFiles.length * 100,
+          icon: "loading"
+        });
+        i++;
+      }
+
+      progressWindow.changeLine({
+        text: `${pdfFiles.length} PDF file(s) exported successfully from collection.`,
+        type: "success",
+        progress: 100,
+        icon: "success"
+      });
+      progressWindow.startCloseTimer(3000);
+      ztoolkit.log("PDF files exported successfully to:", savePath);
+    } catch (error) {
+      progressWindow.changeLine({
+        text: `Failed to export PDF files from collection.`,
+        type: "error",
+        progress: 100,
+        icon: "error"
+      });
+      progressWindow.startCloseTimer(5000);
+      ztoolkit.log("Error exporting PDF files:", error);
+    }
+  }
+
+}
+
 async function onClickExportPDFs() {
   // Get the selected items from ZoteroPane
   const selectedItems = ztoolkit.getGlobal("ZoteroPane").getSelectedItems();
@@ -300,4 +420,5 @@ export default {
   onShortcuts,
   onDialogEvents,
   onClickExportPDFs,
+  onClickCollectionExportPDFs,
 };
