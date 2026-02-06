@@ -209,6 +209,8 @@ async function onClickCollectionExportPDFs() {
       closeTime: -1,
     });
 
+    progressWindow.changeHeadline("ZoteroPDF");
+
     // Open file picker dialog to ask where to save the PDFs
     const savePath = await new ztoolkit.FilePicker(
       "Export PDF Files from Collection",
@@ -254,7 +256,7 @@ async function onClickCollectionExportPDFs() {
       }
 
       progressWindow.changeLine({
-        text: `${pdfFiles.length} PDF file(s) exported successfully from collection.`,
+        text: `${pdfFiles.length} PDF file(s) exported successfully.`,
         type: "success",
         progress: 100,
         icon: "success"
