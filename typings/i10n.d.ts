@@ -10,6 +10,7 @@ export type FluentMessageId =
   | 'item-section-example2-head-text'
   | 'item-section-example2-sidenav-tooltip'
   | 'menuitem-label'
+  | 'menuitem-label-collection'
   | 'pref-enable'
   | 'pref-help'
   | 'pref-input'
