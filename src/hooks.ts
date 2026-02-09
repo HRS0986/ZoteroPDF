@@ -1,6 +1,4 @@
-import {
-  EventHandlerRegistry,
-} from "./modules/eventHandlers";
+import { EventHandlerRegistry } from "./modules/eventHandlers";
 import { initLocale } from "./utils/locale";
 import { createZToolkit } from "./utils/ztoolkit";
 
@@ -71,7 +69,10 @@ async function onClickCollectionExportPDFs() {
   const pdfFiles: Zotero.Item[] = [];
 
   for (const item of collectionItems) {
-    if (item.isAttachment() && item.attachmentContentType === "application/pdf") {
+    if (
+      item.isAttachment() &&
+      item.attachmentContentType === "application/pdf"
+    ) {
       const filePath = item.getFilePath();
       if (filePath) {
         pdfFiles.push(item);
@@ -98,10 +99,13 @@ async function onClickCollectionExportPDFs() {
     return;
   } else {
     // Show progress window
-    const progressWindow = new ztoolkit.ProgressWindow(addon.data.config.addonName, {
-      closeOnClick: true,
-      closeTime: -1,
-    });
+    const progressWindow = new ztoolkit.ProgressWindow(
+      addon.data.config.addonName,
+      {
+        closeOnClick: true,
+        closeTime: -1,
+      },
+    );
 
     progressWindow.changeHeadline("ZoteroPDF");
 
@@ -112,7 +116,7 @@ async function onClickCollectionExportPDFs() {
       [
         ["PDF File (*.pdf)", "*.pdf"],
         ["All Files", "*.*"],
-      ]
+      ],
     ).open();
 
     ztoolkit.log("Save Path:", savePath);
@@ -122,12 +126,14 @@ async function onClickCollectionExportPDFs() {
       return;
     }
 
-    progressWindow.createLine({
-      text: "Exporting PDFs from collection...",
-      type: "default",
-      progress: 0,
-      icon: "loading"
-    }).show();
+    progressWindow
+      .createLine({
+        text: "Exporting PDFs from collection...",
+        type: "default",
+        progress: 0,
+        icon: "loading",
+      })
+      .show();
 
     try {
       let i = 1;
@@ -143,8 +149,8 @@ async function onClickCollectionExportPDFs() {
         progressWindow.changeLine({
           text: `Exporting PDF ${i}/${pdfFiles.length}`,
           type: "default",
-          progress: (i) / pdfFiles.length * 100,
-          icon: "loading"
+          progress: (i / pdfFiles.length) * 100,
+          icon: "loading",
         });
         i++;
       }
@@ -153,7 +159,7 @@ async function onClickCollectionExportPDFs() {
         text: `${pdfFiles.length} PDF file(s) exported successfully.`,
         type: "success",
         progress: 100,
-        icon: "success"
+        icon: "success",
       });
       progressWindow.startCloseTimer(3000);
       ztoolkit.log("PDF files exported successfully to:", savePath);
@@ -162,13 +168,12 @@ async function onClickCollectionExportPDFs() {
         text: `Failed to export PDF files from collection.`,
         type: "error",
         progress: 100,
-        icon: "error"
+        icon: "error",
       });
       progressWindow.startCloseTimer(5000);
       ztoolkit.log("Error exporting PDF files:", error);
     }
   }
-
 }
 
 async function onClickExportPDFs() {
@@ -184,7 +189,10 @@ async function onClickExportPDFs() {
   const pdfFiles: Zotero.Item[] = [];
 
   for (const item of selectedItems) {
-    if (item.isAttachment() && item.attachmentContentType === "application/pdf") {
+    if (
+      item.isAttachment() &&
+      item.attachmentContentType === "application/pdf"
+    ) {
       const filePath = item.getFilePath();
       if (filePath) {
         pdfFiles.push(item);
@@ -209,10 +217,13 @@ async function onClickExportPDFs() {
     return;
   } else {
     // Show progress window
-    const progressWindow = new ztoolkit.ProgressWindow(addon.data.config.addonName, {
-      closeOnClick: true,
-      closeTime: -1,
-    });
+    const progressWindow = new ztoolkit.ProgressWindow(
+      addon.data.config.addonName,
+      {
+        closeOnClick: true,
+        closeTime: -1,
+      },
+    );
 
     // Open file picker dialog to ask where to save the PDF
     const savePath = await new ztoolkit.FilePicker(
@@ -221,7 +232,7 @@ async function onClickExportPDFs() {
       [
         ["PDF File (*.pdf)", "*.pdf"],
         ["All Files", "*.*"],
-      ]
+      ],
     ).open();
 
     ztoolkit.log("Save Path:", savePath);
@@ -231,12 +242,14 @@ async function onClickExportPDFs() {
       return;
     }
 
-    progressWindow.createLine({
-      text: "Exporting PDFs...",
-      type: "default",
-      progress: 0,
-      icon: "loading"
-    }).show();
+    progressWindow
+      .createLine({
+        text: "Exporting PDFs...",
+        type: "default",
+        progress: 0,
+        icon: "loading",
+      })
+      .show();
 
     try {
       let i = 1;
@@ -252,8 +265,8 @@ async function onClickExportPDFs() {
         progressWindow.changeLine({
           text: `Exporting PDF ${i}/${pdfFiles.length}`,
           type: "default",
-          progress: (i) / pdfFiles.length * 100,
-          icon: "loading"
+          progress: (i / pdfFiles.length) * 100,
+          icon: "loading",
         });
         i++;
       }
@@ -262,7 +275,7 @@ async function onClickExportPDFs() {
         text: `PDF files exported successfully.`,
         type: "success",
         progress: 100,
-        icon: "success"
+        icon: "success",
       });
       progressWindow.startCloseTimer(3000);
       ztoolkit.log("PDF filesexported successfully to:", savePath);
@@ -271,13 +284,12 @@ async function onClickExportPDFs() {
         text: `Failed to export PDF files.`,
         type: "error",
         progress: 100,
-        icon: "error"
+        icon: "error",
       });
       progressWindow.startCloseTimer(5000);
       ztoolkit.log("Error exporting PDF files:", error);
     }
   }
-
 }
 
 // Add your hooks here. For element click, etc.

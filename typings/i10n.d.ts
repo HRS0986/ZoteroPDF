@@ -4,9 +4,4 @@
 // @ts-nocheck
 export type FluentMessageId =
   | 'menuitem-label'
-  | 'menuitem-label-collection'
-  | 'prefs-table-detail'
-  | 'prefs-table-title'
-  | 'prefs-title'
-  | 'startup-begin'
-  | 'startup-finish';
+  | 'menuitem-label-collection';

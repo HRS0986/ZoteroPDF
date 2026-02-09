@@ -1,6 +1,8 @@
 import { config } from "../../package.json";
 
-type PluginPrefsMap = _ZoteroTypes.Prefs["PluginPrefsMap"];
+// Define a simple preferences map for the plugin
+// Add your preference keys and types here as needed
+type PluginPrefsMap = Record<string, string | number | boolean>;
 
 const PREFS_PREFIX = config.prefsPrefix;
 
@@ -10,7 +12,10 @@ const PREFS_PREFIX = config.prefsPrefix;
  * @param key
  */
 export function getPref<K extends keyof PluginPrefsMap>(key: K) {
-  return Zotero.Prefs.get(`${PREFS_PREFIX}.${key}`, true) as PluginPrefsMap[K];
+  return Zotero.Prefs.get(
+    `${PREFS_PREFIX}.${String(key)}`,
+    true,
+  ) as PluginPrefsMap[K];
 }
 
 /**
@@ -23,7 +28,7 @@ export function setPref<K extends keyof PluginPrefsMap>(
   key: K,
   value: PluginPrefsMap[K],
 ) {
-  return Zotero.Prefs.set(`${PREFS_PREFIX}.${key}`, value, true);
+  return Zotero.Prefs.set(`${PREFS_PREFIX}.${String(key)}`, value, true);
 }
 
 /**

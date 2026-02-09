@@ -11,7 +11,9 @@ export class EventHandlerRegistry {
       icon: menuIcon,
       getVisibility: () => {
         // Get selected items
-        const selectedItems = ztoolkit.getGlobal("ZoteroPane").getSelectedItems();
+        const selectedItems = ztoolkit
+          .getGlobal("ZoteroPane")
+          .getSelectedItems();
 
         if (!selectedItems || selectedItems.length === 0) {
           return false;
@@ -20,7 +22,10 @@ export class EventHandlerRegistry {
         // Check if any selected item has a PDF attachment
         for (const item of selectedItems) {
           // If the item itself is a PDF attachment
-          if (item.isAttachment() && item.attachmentContentType === "application/pdf") {
+          if (
+            item.isAttachment() &&
+            item.attachmentContentType === "application/pdf"
+          ) {
             return true;
           }
           // If it's a regular item, check for PDF attachments
@@ -67,7 +72,10 @@ export class EventHandlerRegistry {
         // Check if any item in the collection has a PDF attachment
         for (const item of collectionItems) {
           // If the item itself is a PDF attachment
-          if (item.isAttachment() && item.attachmentContentType === "application/pdf") {
+          if (
+            item.isAttachment() &&
+            item.attachmentContentType === "application/pdf"
+          ) {
             return true;
           }
           // If it's a regular item, check for PDF attachments
