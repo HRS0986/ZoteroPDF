@@ -5,7 +5,7 @@ export class EventHandlerRegistry {
     const menuIcon = `chrome://${addon.data.config.addonRef}/content/icons/favicon@0.5x.png`;
     ztoolkit.Menu.register("item", {
       tag: "menuitem",
-      id: "zotero-itemmenu-addontemplate-test",
+      id: "zotero-itemmenu-zoteropdf-export",
       label: getString("menuitem-label"),
       commandListener: (_) => addon.hooks.onClickExportPDFs(),
       icon: menuIcon,
@@ -44,7 +44,7 @@ export class EventHandlerRegistry {
     const menuIcon = `chrome://${addon.data.config.addonRef}/content/icons/favicon@0.5x.png`;
     ztoolkit.Menu.register("collection", {
       tag: "menuitem",
-      id: "zotero-collectionmenu-addontemplate-test",
+      id: "zotero-collectionmenu-zoteropdf-export",
       label: getString("menuitem-label-collection"),
       commandListener: (_) => addon.hooks.onClickCollectionExportPDFs(),
       icon: menuIcon,

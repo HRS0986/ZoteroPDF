@@ -1,7 +1,7 @@
 import {
   EventHandlerRegistry,
 } from "./modules/eventHandlers";
-import { getString, initLocale } from "./utils/locale";
+import { initLocale } from "./utils/locale";
 import { createZToolkit } from "./utils/ztoolkit";
 
 async function onStartup() {
@@ -30,34 +30,9 @@ async function onMainWindowLoad(win: _ZoteroTypes.MainWindow): Promise<void> {
     `${addon.data.config.addonRef}-mainWindow.ftl`,
   );
 
-  const popupWin = new ztoolkit.ProgressWindow(addon.data.config.addonName, {
-    closeOnClick: true,
-    closeTime: -1,
-  })
-    .createLine({
-      text: getString("startup-begin"),
-      type: "default",
-      progress: 0,
-    })
-    .show();
-
-  await Zotero.Promise.delay(1000);
-  popupWin.changeLine({
-    progress: 30,
-    text: `[30%] ${getString("startup-begin")}`,
-  });
-
   EventHandlerRegistry.registerRightClickMenuItem();
 
   EventHandlerRegistry.registerRightClickCollectionMenuItem();
-
-  await Zotero.Promise.delay(1000);
-
-  popupWin.changeLine({
-    progress: 100,
-    text: `[100%] ${getString("startup-finish")}`,
-  });
-  popupWin.startCloseTimer(5000);
 }
 
 async function onMainWindowUnload(win: Window): Promise<void> {
