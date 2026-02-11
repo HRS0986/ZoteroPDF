@@ -10,32 +10,24 @@ export class EventHandlerRegistry {
       commandListener: (_) => addon.hooks.onClickExportPDFs(),
       icon: menuIcon,
       getVisibility: () => {
-        // Get selected items
         const selectedItems = ztoolkit
           .getGlobal("ZoteroPane")
           .getSelectedItems();
 
-        if (!selectedItems || selectedItems.length === 0) {
-          return false;
-        }
+        if (!selectedItems || selectedItems.length === 0) return false;
 
-        // Check if any selected item has a PDF attachment
         for (const item of selectedItems) {
-          // If the item itself is a PDF attachment
           if (
             item.isAttachment() &&
             item.attachmentContentType === "application/pdf"
           ) {
             return true;
           }
-          // If it's a regular item, check for PDF attachments
           if (item.isRegularItem()) {
             const attachments = item.getAttachments();
             for (const attachmentID of attachments) {
               const attachment = Zotero.Items.get(attachmentID);
-              if (attachment.attachmentContentType === "application/pdf") {
-                return true;
-              }
+              if (attachment.attachmentContentType === "application/pdf") return true;
             }
           }
         }
@@ -54,42 +46,28 @@ export class EventHandlerRegistry {
       commandListener: (_) => addon.hooks.onClickCollectionExportPDFs(),
       icon: menuIcon,
       getVisibility: () => {
-        // Get the selected collection
         const ZoteroPane = ztoolkit.getGlobal("ZoteroPane");
         const selectedCollection = ZoteroPane.getSelectedCollection();
 
-        if (!selectedCollection) {
-          return false;
-        }
-
-        // Get all items in the collection
+        if (!selectedCollection) return false;
         const collectionItems = selectedCollection.getChildItems();
+        if (!collectionItems || collectionItems.length === 0) return false;
 
-        if (!collectionItems || collectionItems.length === 0) {
-          return false;
-        }
-
-        // Check if any item in the collection has a PDF attachment
         for (const item of collectionItems) {
-          // If the item itself is a PDF attachment
           if (
             item.isAttachment() &&
             item.attachmentContentType === "application/pdf"
           ) {
             return true;
           }
-          // If it's a regular item, check for PDF attachments
           if (item.isRegularItem()) {
             const attachments = item.getAttachments();
             for (const attachmentID of attachments) {
               const attachment = Zotero.Items.get(attachmentID);
-              if (attachment.attachmentContentType === "application/pdf") {
-                return true;
-              }
+              if (attachment.attachmentContentType === "application/pdf") return true;
             }
           }
         }
-
         return false;
       },
     });

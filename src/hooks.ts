@@ -44,7 +44,6 @@ function onShutdown(): void {
 }
 
 async function onClickCollectionExportPDFs() {
-  // Get the selected collection from ZoteroPane
   const ZoteroPane = ztoolkit.getGlobal("ZoteroPane");
   const selectedCollection = ZoteroPane.getSelectedCollection();
 
@@ -53,7 +52,6 @@ async function onClickCollectionExportPDFs() {
     return;
   }
 
-  // Get all items in the collection
   const collectionItems = selectedCollection.getChildItems();
 
   if (!collectionItems || collectionItems.length === 0) {
@@ -61,7 +59,6 @@ async function onClickCollectionExportPDFs() {
     return;
   }
 
-  // Get all pdf files from the collection items
   const pdfFiles: Zotero.Item[] = [];
 
   for (const item of collectionItems) {
@@ -74,7 +71,6 @@ async function onClickCollectionExportPDFs() {
         pdfFiles.push(item);
       }
     } else if (item.isRegularItem()) {
-      // If it's a regular item, find all PDF attachments
       const attachments = item.getAttachments();
       for (const attachmentID of attachments) {
         const attachment = Zotero.Items.get(attachmentID);
