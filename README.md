@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/banner.png" alt="ZoteroPDF Banner" width="100%">
+</p>
+
 # ZoteroPDF
 
 [![zotero target version](https://img.shields.io/badge/Zotero-7-green?style=flat-square&logo=zotero&logoColor=CC2936)](https://www.zotero.org)
