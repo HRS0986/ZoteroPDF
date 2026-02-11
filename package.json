@@ -1,7 +1,7 @@
 {
   "name": "zoteropdf",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A simple and efficient Zotero plugin for exporting PDF files from your library",
   "config": {
     "addonName": "Zotero PDF",
