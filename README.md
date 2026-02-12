@@ -20,8 +20,8 @@ A simple and efficient Zotero plugin for exporting PDF files from your library.
 ## Installation
 
 1. Download the latest `.xpi` file from the [Releases](https://github.com/HRS0986/ZoteroPDF/releases) page
-2. In Zotero, go to `Tools` → `Add-ons`
-3. Click the gear icon and select `Install Add-on From File...`
+2. In Zotero, go to `Tools` → `Plugins`
+3. Click the gear icon and select `Install Plugin From File...`
 4. Select the downloaded `.xpi` file
 5. Restart Zotero
 
