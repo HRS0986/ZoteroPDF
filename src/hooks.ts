@@ -136,7 +136,7 @@ async function onClickCollectionExportPDFs() {
           ztoolkit.log("PDF file not found");
           continue;
         }
-        const finalSavePath = `${savePath}\\${file.attachmentFilename}`;
+        const finalSavePath = PathUtils.join(savePath, file.attachmentFilename);
         await IOUtils.copy(filePath, finalSavePath);
         progressWindow.changeLine({
           text: `Exporting PDF ${i}/${pdfFiles.length}`,
@@ -252,7 +252,7 @@ async function onClickExportPDFs() {
           ztoolkit.log("PDF file not found");
           continue;
         }
-        const finalSavePath = `${savePath}\\${file.attachmentFilename}`;
+        const finalSavePath = PathUtils.join(savePath, file.attachmentFilename);
         await IOUtils.copy(filePath, finalSavePath);
         progressWindow.changeLine({
           text: `Exporting PDF ${i}/${pdfFiles.length}`,
